@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useFetch } from '../hooks/useFetch'
-import planetImg from '../assets/planet.png'
-import { Loading } from '../components/Loading'
 import { Label } from '../components/Label'
-import { ListContainer } from '../components/ListContainer'
-import { LinkItem } from '../components/LinkItem'
+import { Loading } from '../components/Loading'
+import RainbowTV from '../assets/rainbowTvScreen.png'
 import { Card } from '../components/Card'
-export const SingleLocation = () => {
+export const SingleEpisode = () => {
   const { id } = useParams()
 
-  const [residents, setResidents] = useState([])
-
+  const [characters, setCharacters] = useState([])
   const {
-    data: location,
+    data: episode,
     startFetching,
     loading,
-  } = useFetch(`https://rickandmortyapi.com/api/location/${id}`)
+  } = useFetch(`https://rickandmortyapi.com/api/episode/${id}`)
 
-  const fetchResidents = async (urls) => {
+  const fetchCharacters = async (urls) => {
     const results = await Promise.all(
       urls.map((url) => fetch(url).then((r) => r.json()))
     )
@@ -30,46 +27,54 @@ export const SingleLocation = () => {
   }, [])
 
   useEffect(() => {
-    if (location) {
+    if (episode) {
       ;(async () => {
-        const residentsData = await fetchResidents(location.residents)
+        const charactersData = await fetchCharacters(episode.characters)
 
-        setResidents(residentsData)
+        setCharacters(charactersData)
       })()
     }
-  }, [location])
+  }, [episode])
 
   return (
     <>
-      {location ? (
+      {episode ? (
         <>
           <header className='flex flex-col items-center'>
             <img
               className='max-w-xl mx-auto mt-20'
-              src={planetImg}
-              alt='planet'
+              src={RainbowTV}
+              alt='rainbow TV'
             />
             <h1 className='text-center text-7xl font-bold my-10 text-zinc-800'>
-              {location.name}
+              {episode.name}
             </h1>
-
+            <p className='text-4xl font-semibold mb-12'>
+              Seasson{' '}
+              {episode.episode.slice(
+                episode.episode.lastIndexOf('S') + 1,
+                episode.episode.lastIndexOf('E')
+              )}{' '}
+              Episode{' '}
+              {episode.episode.slice(episode.episode.lastIndexOf('E') + 1)}
+            </p>
             <section className='flex flex-wrap items-center justify-evenly p-5 shadow-sm bg-zinc-200 rounded-xl'>
-              <Label text={location.type} icon='ri-earth-line' title={'Type'} />
               <Label
-                text={location.dimension}
-                icon={'ri-space-ship-line'}
-                title={'Dimension'}
+                text={episode.air_date}
+                icon='ri-calendar-event-line'
+                title={'Type'}
               />
             </section>
           </header>
+
           <section>
             <h1 className='text-center text-5xl font-bold mt-20'>
-              All Characters in this location
+              All Characters in the Episode
             </h1>
             <div className='flex flex-wrap justify-center my-5'>
-              {residents
-                ? residents.map((resident) => (
-                    <Card key={resident.id} data={resident} />
+              {characters
+                ? characters.map((character) => (
+                    <Card key={character.id} data={character} />
                   ))
                 : ''}
             </div>

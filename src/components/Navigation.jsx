@@ -14,8 +14,9 @@ export const Navigation = () => {
         <NavItem>
           <Link to='/all-locations'>All Locations</Link>
         </NavItem>
-        <NavItem>Search a character</NavItem>
-        <NavItem>Locations</NavItem>
+        <NavItem>
+          <Link to='/all-episodes'>All Episodes</Link>
+        </NavItem>
       </ul>
     </nav>
   )

@@ -37,7 +37,7 @@ export const SingleCharacter = () => {
   }, [character])
 
   return (
-    <main>
+    <>
       {character ? (
         <main className='container mx-auto'>
           <header className='flex flex-col items-center'>
@@ -82,7 +82,14 @@ export const SingleCharacter = () => {
           {/* Table 1 */}
           <ListContainer title={`${character.name} is from...?`}>
             <ListItem title='Origin' text={character.origin.name} />
-            <ListItem title='Location' text={character.location.name} />
+            <LinkItem title={`Location`}>
+              <Link
+                to={`/single-location/${character.location.url.slice(
+                  character.location.url.lastIndexOf('/') + 1
+                )}`}
+                className='text-4xl text-center py-5 text-cyan-600 hover:text-sky-500 hover:underline hover:underline-offset-2'
+              >{`${character.location.name}`}</Link>
+            </LinkItem>
           </ListContainer>
 
           {/* Table 2 */}
@@ -94,7 +101,7 @@ export const SingleCharacter = () => {
               episodes.map((ep) => (
                 <LinkItem key={ep.id} title={`Episode ${ep.id}`}>
                   <Link
-                    to={'/'}
+                    to={`/single-episode/${ep.id}`}
                     className='text-4xl text-center py-5 text-cyan-600 hover:text-sky-500 hover:underline hover:underline-offset-2'
                   >{`Go to Episode ${ep.id}`}</Link>
                 </LinkItem>
@@ -106,6 +113,6 @@ export const SingleCharacter = () => {
           <Loading />
         </section>
       )}
-    </main>
+    </>
   )
 }
