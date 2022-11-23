@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { Label } from '../components/Label'
 import { LinkItem } from '../components/LinkItem'
@@ -9,7 +10,7 @@ import { useFetch } from '../hooks/useFetch'
 
 export const SingleCharacter = () => {
   const { id } = useParams()
-
+  const { t } = useTranslation()
   // const [character, setCharacter] = useState(null)
   const [episodes, setEpisodes] = useState([])
   const [episodesLoading, setEpisodesLoading] = useState(false)
@@ -57,12 +58,26 @@ export const SingleCharacter = () => {
             </h1>
             <section className='flex flex-wrap items-center justify-evenly p-5 shadow-sm bg-zinc-200 rounded-xl'>
               <Label
-                text={character.status}
+                text={
+                  character.status === 'Alive'
+                    ? t('StatusAlive.text')
+                    : character.status === 'Dead'
+                    ? t('StatusDead.text')
+                    : t('Unknown.text')
+                }
                 icon='ri-heart-pulse-fill'
                 title={'Status'}
               />
               <Label
-                text={character.gender}
+                text={
+                  character.gender === 'Female'
+                    ? t('GenderFemale.text')
+                    : character.gender === 'Male'
+                    ? t('GenderMale.text')
+                    : character.gender === 'Genderless'
+                    ? t('GenderGenderless.text')
+                    : t('Unknown.text')
+                }
                 icon={
                   character.gender === 'Female'
                     ? 'ri-women-line'
@@ -73,16 +88,26 @@ export const SingleCharacter = () => {
                 title={'Gender'}
               />
               <Label
-                text={character.species}
+                text={
+                  character.species === 'Human'
+                    ? t('SpecieHuman.text')
+                    : character.species === 'Humanoid'
+                    ? t('SpecieHumanoid.text')
+                    : character.species === 'Mythological Creature'
+                    ? t('SpecieMythological.text')
+                    : character.species === 'Poopybutthole'
+                    ? t('SpeciePoopybutthole.text')
+                    : character.species
+                }
                 icon='ri-user-6-line'
                 title={'Species'}
               />
             </section>
           </header>
           {/* Table 1 */}
-          <ListContainer title={`${character.name} is from...?`}>
-            <ListItem title='Origin' text={character.origin.name} />
-            <LinkItem title={`Location`}>
+          <ListContainer title={`${character.name} ${t('isFrom.text')}...?`}>
+            <ListItem title={t('Origin.text')} text={character.origin.name} />
+            <LinkItem title={t('Location.text')}>
               <Link
                 to={`/single-location/${character.location.url.slice(
                   character.location.url.lastIndexOf('/') + 1
@@ -94,16 +119,18 @@ export const SingleCharacter = () => {
 
           {/* Table 2 */}
           <ListContainer
-            title={`Episodes where ${character.name} appears`}
+            title={`${t('Episodes.text')} ${t('Where.text')} ${
+              character.name
+            } ${t('Appears.text')}`}
             maxWidth='max-w-7xl'
           >
             {episodes.length &&
               episodes.map((ep) => (
-                <LinkItem key={ep.id} title={`Episode ${ep.id}`}>
+                <LinkItem key={ep.id} title={`${t('Episode.text')} ${ep.id}`}>
                   <Link
                     to={`/single-episode/${ep.id}`}
                     className='text-4xl text-center py-5 text-cyan-600 hover:text-sky-500 hover:underline hover:underline-offset-2'
-                  >{`Go to Episode ${ep.id}`}</Link>
+                  >{`${t('GoTo.text')} ${t('Episode.text')} ${ep.id}`}</Link>
                 </LinkItem>
               ))}
           </ListContainer>

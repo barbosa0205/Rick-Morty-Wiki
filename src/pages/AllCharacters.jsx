@@ -3,8 +3,9 @@ import { List } from '../components/List'
 import { Pagination } from '../components/Pagination'
 import { Card } from '../components/Card'
 import { useFetch } from '../hooks/useFetch'
-
+import { useTranslation } from 'react-i18next'
 export const AllCharacters = () => {
+  const { t } = useTranslation()
   const [apiURL, setApiURL] = useState(
     'https://rickandmortyapi.com/api/character'
   )
@@ -18,7 +19,7 @@ export const AllCharacters = () => {
   return (
     <main className='container mx-auto'>
       <h1 className='text-6xl text-center font-bold text-emerald-600 mt-10'>
-        All Characters
+        {t('NavAllCharacters.text')}
       </h1>
 
       <List loading={loading}>
@@ -35,6 +36,11 @@ export const AllCharacters = () => {
                 <Card key={character.id} data={character} />
               ))}
             </div>
+            <Pagination
+              next={data.info.next}
+              prev={data.info.prev}
+              changeURL={setApiURL}
+            />
           </>
         )}
       </List>
