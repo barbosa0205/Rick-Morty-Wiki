@@ -48,10 +48,10 @@ export const SingleEpisode = () => {
               src={RainbowTV}
               alt='rainbow TV'
             />
-            <h1 className='text-center text-7xl font-bold my-10 text-zinc-800'>
+            <h1 className='text-center text-7xl font-bold my-10 text-zinc-800 dark:text-gray-100'>
               {episode.name}
             </h1>
-            <p className='text-4xl font-semibold mb-12'>
+            <p className='text-4xl font-semibold mb-12 dark:text-gray-100'>
               {t('Seasson.text')}{' '}
               {episode.episode.slice(
                 episode.episode.lastIndexOf('S') + 1,

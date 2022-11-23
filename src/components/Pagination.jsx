@@ -5,7 +5,7 @@ export const Pagination = ({ next, prev, changeURL }) => {
   const [pages, setPages] = useState([])
   const { t } = useTranslation()
   return (
-    <nav className='flex items-center justify-between bg-zinc-800 p-3 text-white font-bold'>
+    <nav className='flex items-center justify-between bg-zinc-800 p-3 text-white font-bold dark:bg-zinc-700'>
       {prev ? (
         <button
           onClick={() => changeURL(prev)}

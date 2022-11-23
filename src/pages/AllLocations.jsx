@@ -42,7 +42,7 @@ export const AllLocations = () => {
                 <LinkItem key={location.id} title={`${location.name}`}>
                   <Link
                     to={`/single-location/${location.id}`}
-                    className='text-4xl text-center py-5 text-cyan-600 hover:text-sky-500 hover:underline hover:underline-offset-2'
+                    className='text-4xl text-center py-5 text-cyan-600 hover:text-sky-500 dark:text-cyan-500 dark:hover:text-cyan-400 hover:underline hover:underline-offset-2'
                   >{`${t('LocationGo.text')} ${location.name}`}</Link>
                 </LinkItem>
               ))}

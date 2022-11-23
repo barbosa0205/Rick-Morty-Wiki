@@ -53,10 +53,10 @@ export const SingleCharacter = () => {
               src={character.image}
               alt='character'
             />
-            <h1 className='text-center text-7xl font-semibold my-5'>
+            <h1 className='text-center text-7xl font-semibold my-5 dark:text-gray-100'>
               {character.name}
             </h1>
-            <section className='flex flex-wrap items-center justify-evenly p-5 shadow-sm bg-zinc-200 rounded-xl'>
+            <section className='flex flex-wrap items-center justify-evenly p-5 shadow-sm bg-zinc-200 dark:bg-zinc-800 rounded-xl'>
               <Label
                 text={
                   character.status === 'Alive'
@@ -105,8 +105,15 @@ export const SingleCharacter = () => {
             </section>
           </header>
           {/* Table 1 */}
-          <ListContainer title={`${character.name} ${t('isFrom.text')}...?`}>
-            <ListItem title={t('Origin.text')} text={character.origin.name} />
+          <ListContainer title={`${character.name} ${t('isFrom.text')} ... ?`}>
+            <LinkItem title={t('Origin.text')}>
+              <Link
+                to={`/single-location/${character.origin.url.slice(
+                  character.location.url.lastIndexOf('/') + 1
+                )}`}
+                className='text-4xl text-center py-5 text-cyan-600 hover:text-sky-500 hover:underline hover:underline-offset-2'
+              >{`${character.origin.name}`}</Link>
+            </LinkItem>
             <LinkItem title={t('Location.text')}>
               <Link
                 to={`/single-location/${character.location.url.slice(

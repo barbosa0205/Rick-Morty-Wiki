@@ -18,7 +18,7 @@ export const AllCharacters = () => {
 
   return (
     <main className='container mx-auto'>
-      <h1 className='text-6xl text-center font-bold text-emerald-600 mt-10'>
+      <h1 className='text-6xl text-center font-bold text-emerald-500 mt-10'>
         {t('NavAllCharacters.text')}
       </h1>
 
