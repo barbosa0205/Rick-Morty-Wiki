@@ -60,7 +60,7 @@ export const SingleEpisode = () => {
               {t('Episode.text')}{' '}
               {episode.episode.slice(episode.episode.lastIndexOf('E') + 1)}
             </p>
-            <section className='flex flex-wrap items-center justify-evenly p-5 shadow-sm bg-zinc-200 rounded-xl'>
+            <section className='flex flex-wrap items-center justify-evenly p-5 shadow-sm bg-zinc-200  dark:bg-zinc-800 rounded-xl'>
               <Label
                 text={episode.air_date}
                 icon='ri-calendar-event-line'
@@ -70,7 +70,7 @@ export const SingleEpisode = () => {
           </header>
 
           <section>
-            <h1 className='text-center text-5xl font-bold mt-20'>
+            <h1 className='text-center text-5xl font-bold mt-20 dark:text-zinc-100'>
               {t('AllCharactersInEpisode.text')}
             </h1>
             <div className='flex flex-wrap justify-center my-5'>

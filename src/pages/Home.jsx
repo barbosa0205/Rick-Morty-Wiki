@@ -10,7 +10,7 @@ export const Home = () => {
       <h1 className='text-7xl text-center my-20 px-3 font-bold text-emerald-500'>
         RICK & MORTY WIKI
       </h1>
-      <img className='px-3 max-w-7xl' src={rickYMorty} alt='rick y morty' />
+      <img className='px-3 sm:max-w-7xl' src={rickYMorty} alt='rick y morty' />
 
       <button className='my-24 w-96 bg-emerald-500 rounded-md py-5 text-4xl font-semibold text-white'>
         <Link to={'/all-characters'}>{t('ButtonHome.text')}</Link>

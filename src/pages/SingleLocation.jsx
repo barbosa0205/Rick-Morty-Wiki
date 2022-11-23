@@ -54,11 +54,11 @@ export const SingleLocation = () => {
               src={planetImg}
               alt='planet'
             />
-            <h1 className='text-center text-7xl font-bold my-10 text-zinc-800'>
+            <h1 className='text-center text-7xl font-bold my-10 text-zinc-800 dark:text-zinc-100'>
               {location.name}
             </h1>
 
-            <section className='flex flex-wrap items-center justify-evenly p-5 shadow-sm bg-zinc-200 rounded-xl'>
+            <section className='flex flex-wrap items-center justify-evenly p-5 shadow-sm bg-zinc-200 rounded-xl dark:bg-zinc-800'>
               <Label
                 text={
                   location.type === 'Planet'
@@ -92,7 +92,7 @@ export const SingleLocation = () => {
             </section>
           </header>
           <section>
-            <h1 className='text-center text-5xl font-bold mt-20'>
+            <h1 className='text-center text-5xl font-bold mt-20 dark:text-zinc-100'>
               {t('AllCharactersInLocation.text')}
             </h1>
             <div className='flex flex-wrap justify-center my-5'>
