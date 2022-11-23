@@ -8,11 +8,11 @@ export const List = ({ children, loading }) => {
   return (
     <>
       {loading ? (
-        <section className='container p-3 mt-10 shadow-md rounded-md bg-gray-50'>
+        <section className='container p-3 mt-10 shadow-md rounded-md bg-gray-50 dark:bg-zinc-800'>
           <Loading />
         </section>
       ) : (
-        <section className='container p-3 mt-10 shadow-md rounded-md bg-gray-50'>
+        <section className='container p-3 mt-10 shadow-md rounded-md bg-gray-50 dark:bg-zinc-800'>
           {children}
         </section>
       )}
