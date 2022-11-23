@@ -5,7 +5,9 @@ import { Label } from '../components/Label'
 import { Loading } from '../components/Loading'
 import RainbowTV from '../assets/rainbowTvScreen.png'
 import { Card } from '../components/Card'
+import { useTranslation } from 'react-i18next'
 export const SingleEpisode = () => {
+  const { t } = useTranslation()
   const { id } = useParams()
 
   const [characters, setCharacters] = useState([])
@@ -50,12 +52,12 @@ export const SingleEpisode = () => {
               {episode.name}
             </h1>
             <p className='text-4xl font-semibold mb-12'>
-              Seasson{' '}
+              {t('Seasson.text')}{' '}
               {episode.episode.slice(
                 episode.episode.lastIndexOf('S') + 1,
                 episode.episode.lastIndexOf('E')
               )}{' '}
-              Episode{' '}
+              {t('Episode.text')}{' '}
               {episode.episode.slice(episode.episode.lastIndexOf('E') + 1)}
             </p>
             <section className='flex flex-wrap items-center justify-evenly p-5 shadow-sm bg-zinc-200 rounded-xl'>
@@ -69,7 +71,7 @@ export const SingleEpisode = () => {
 
           <section>
             <h1 className='text-center text-5xl font-bold mt-20'>
-              All Characters in the Episode
+              {t('AllCharactersInEpisode.text')}
             </h1>
             <div className='flex flex-wrap justify-center my-5'>
               {characters

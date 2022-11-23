@@ -7,9 +7,10 @@ import { Label } from '../components/Label'
 import { ListContainer } from '../components/ListContainer'
 import { LinkItem } from '../components/LinkItem'
 import { Card } from '../components/Card'
+import { useTranslation } from 'react-i18next'
 export const SingleLocation = () => {
   const { id } = useParams()
-
+  const { t } = useTranslation()
   const [residents, setResidents] = useState([])
 
   const {
@@ -19,8 +20,12 @@ export const SingleLocation = () => {
   } = useFetch(`https://rickandmortyapi.com/api/location/${id}`)
 
   const fetchResidents = async (urls) => {
+    let newUrls = urls
+    if (urls.length > 100) {
+      newUrls = urls.slice(100)
+    }
     const results = await Promise.all(
-      urls.map((url) => fetch(url).then((r) => r.json()))
+      newUrls.map((url, index) => fetch(url).then((r) => r.json()))
     )
     return results
   }
@@ -54,9 +59,33 @@ export const SingleLocation = () => {
             </h1>
 
             <section className='flex flex-wrap items-center justify-evenly p-5 shadow-sm bg-zinc-200 rounded-xl'>
-              <Label text={location.type} icon='ri-earth-line' title={'Type'} />
               <Label
-                text={location.dimension}
+                text={
+                  location.type === 'Planet'
+                    ? t('TypePlanet.text')
+                    : location.type === 'Cluster'
+                    ? t('TypeCluster.text')
+                    : location.type === 'Microverse'
+                    ? t('TypeMicroverse.text')
+                    : location.type === 'Resort'
+                    ? t('TypeResort.text')
+                    : location.type === 'Fantasy town'
+                    ? t('TypeFantasyTown.text')
+                    : location.type
+                }
+                icon='ri-earth-line'
+                title={'Type'}
+              />
+              <Label
+                text={
+                  location.dimension === 'Fantasy Dimension'
+                    ? t('DimensionFantasy.text')
+                    : location.dimension === 'unknown'
+                    ? t('Unknown.text')
+                    : location.dimension === 'Post-Apocalyptic Dimension'
+                    ? t('DimensionPostApocalyptic.text')
+                    : location.dimension
+                }
                 icon={'ri-space-ship-line'}
                 title={'Dimension'}
               />
@@ -64,7 +93,7 @@ export const SingleLocation = () => {
           </header>
           <section>
             <h1 className='text-center text-5xl font-bold mt-20'>
-              All Characters in this location
+              {t('AllCharactersInLocation.text')}
             </h1>
             <div className='flex flex-wrap justify-center my-5'>
               {residents
